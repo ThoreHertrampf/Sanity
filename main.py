@@ -1,6 +1,7 @@
 from Class_Template import Template
 import pyperclip
 
+
 def create_template():
     template_file = open("Templates.txt", "r")
     lines_file = template_file.readlines()
