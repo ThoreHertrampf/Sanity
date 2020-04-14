@@ -1,0 +1,19 @@
+
+
+test
+
+\begin{figure}[H]
+
+	\begin{center}
+
+		\includegraphics[width=12cm]{figures/name}
+
+		\caption{}
+
+		\label{fig:}
+
+	\end{center}
+
+\end{figure}
+
+End of template: test
