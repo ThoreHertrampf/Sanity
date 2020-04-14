@@ -17,3 +17,12 @@ test
 \end{figure}
 
 End of template: test
+
+
+test2
+
+1: Create a new template
+2: Change an existing template
+3: Delete an existing template
+4: Copy existing template to clipboard
+End of template: test2
