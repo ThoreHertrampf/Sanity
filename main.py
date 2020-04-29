@@ -7,6 +7,22 @@ from PIL import ImageTk, Image
 
 
 def create_template():
+
+    create_window = Toplevel()
+    create_window.title("Create Template")
+    create_window.geometry("1000x600")
+
+    template_name = Entry(create_window,  width = 40, borderwidth = 10)
+    template_name.grid(row = 1, column = 1)
+    template_name.delete(0, END)
+    template_name.insert(0, "Enter the name of a new template!")
+
+    confirm_button = Button(create_window, text = "Confirm", command = template_name.get)
+    confirm_button.grid(row = 1, column = 2)
+    
+
+
+
     template_file = open("Templates.txt", "r")
     lines_file = template_file.readlines()
     name = input("Enter the name of a new template: ")
@@ -36,6 +52,8 @@ def create_template():
             continue
         elif confirmation == "Exit" or confirmation == "exit":
             break
+
+    create_window.destroy()
 
 def change_template():
     print("Changed Template")
@@ -154,6 +172,7 @@ function_button_3 = Button(root, text = "Copy Template", command = copy_template
 function_button_3.grid(row = 3, column = 1, padx = 10, pady = 5, ipadx = 10)
 function_button_4 = Button(root, text = "Delete Template", command = delete_template)
 function_button_4.grid(row = 4, column = 1, padx = 10, pady = 5, ipadx = 10)
+
 
 
 
