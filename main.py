@@ -1,5 +1,9 @@
 from Class_Template import Template
 import pyperclip
+from tkinter import *
+from tkinter import messagebox
+from tkinter import filedialog
+from PIL import ImageTk, Image
 
 
 def create_template():
@@ -132,8 +136,28 @@ def switch_functions():
     function = switch_functions.get(arg, lambda: print("Invalid input!"))
     function()
 
-while 1:
-    switch_functions()
+#while 1:
+#    switch_functions()
+
+
+
+root = Tk()
+root.title("Sanity")
+#root.iconbitmap('')
+root.geometry("1000x600")
+
+function_button_1 = Button(root, text = "Create Template", command = create_template)
+function_button_1.grid(row = 1, column = 1, padx = 10, pady = 5, ipadx = 10)
+function_button_2 = Button(root, text = "Change Template", command = change_template)
+function_button_2.grid(row = 2, column = 1, padx = 10, pady = 5, ipadx = 10)
+function_button_3 = Button(root, text = "Copy Template", command = copy_template)
+function_button_3.grid(row = 3, column = 1, padx = 10, pady = 5, ipadx = 10)
+function_button_4 = Button(root, text = "Delete Template", command = delete_template)
+function_button_4.grid(row = 4, column = 1, padx = 10, pady = 5, ipadx = 10)
+
+
+
+root.mainloop()
 
 #clipboard_content = pyperclip.paste()
 #pyperclip.copy("Hello World")

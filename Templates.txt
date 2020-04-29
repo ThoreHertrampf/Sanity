@@ -26,3 +26,9 @@ test2
 3: Delete an existing template
 4: Copy existing template to clipboard
 End of template: test2
+
+
+test3
+
+
+End of template: test3
