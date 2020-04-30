@@ -32,3 +32,62 @@ test3
 
 
 End of template: test3
+
+
+cviuop
+
+umn = 1)
+            no = Button(create_window, text = "Yes", command = no)
+            no.grid(row = 5, column = 2)
+End of template: cviuop
+
+
+test5
+
+\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=13cm]{Glasflaschen.jpg}
+%	\caption{}
+%	\label{fig:}
+%\end{figure}
+%\noindent
+End of template: test5
+
+
+yugihljvghg
+
+ments>cd atom/sa
+End of template: yugihljvghg
+
+
+bfdf
+
+\usepackage[utf8]{inputenc}
+\usepackage{english}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{pdfpages}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{pdfpages}
+\usepackage{listings}
+End of template: bfdf
+
+
+iuztrdfghjk
+
+
+C:\Users\Thore\Documents\Atom\Sanity>main.py
+
+C:\Users\Thore\Documents\
+End of template: iuztrdfghjk
+
+
+iuztrfghjklö
+
+name = template_name.get()
+        template_name.delete(0, END)
+End of template: iuztrfghjklö
