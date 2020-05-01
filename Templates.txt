@@ -28,3 +28,11 @@ test4
 
 .index(templ
 End of template: test4
+
+
+test5
+
+all(
+_tkinter.TclError: bad side "center": must be top, bottom, left, or right
+
+End of template: test5

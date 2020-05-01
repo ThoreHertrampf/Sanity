@@ -170,62 +170,31 @@ def delete_template():
         if i == 1:
             print("No template matching the name was found.")
 
-def copy_template(number):
+def copy_template(name):
 
-    print(number)
+    template_file = open("Templates.txt", "r")
+    lines_file = template_file.readlines()
 
-    def confirm_name():
+    for lines in lines_file:
 
-        if 'wrong_name' in globals():
-            wrong_name.destroy()
+        i = 1
+        if lines != name+"\n":
+            continue
 
-        name = template_name.get()
-        template_name.delete(0, END)
+        else:
+            i = 0
+            loop = 0
 
-        template_file = open("Templates.txt", "r")
-        lines_file = template_file.readlines()
+            start = int(lines_file.index(name + "\n")) + 2
+            end = int(lines_file.index("End of template: " + name + "\n"))
 
-        for lines in lines_file:
+            output = ""
+            for n in range(start, end):
+                if ((n - start) % 2) == 0:  #because in txt are extra new lines for some reason
+                    output = output + lines_file[n]
 
-            i = 1
-            if lines != name+"\n":
-                continue
-
-            else:
-                i = 0
-                loop = 0
-
-                start = int(lines_file.index(name + "\n")) + 2
-                end = int(lines_file.index("End of template: " + name + "\n"))
-
-                output = ""
-                for n in range(start, end):
-                    if ((n - start) % 2) == 0:  #because in txt are extra new lines for some reason
-                        output = output + lines_file[n]
-
-                pyperclip.copy(output)
-                copy_window.destroy()
-                return
-
-        if i == 1:
-            wrong_name = Label(copy_window, text = "No Template with that name exists!")
-            wrong_name.grid(row = 2, column = 2)
+            pyperclip.copy(output)
             return
-
-
-    copy_window = Toplevel()
-    copy_window.title("Copy Template")
-    copy_window.geometry("1000x600")
-
-    label_entry = Label(copy_window, text = "Enter the name of the template you want to copy!")
-    label_entry.grid(row = 1, column = 1)
-
-    template_name = Entry(copy_window,  width = 40, borderwidth = 10)
-    template_name.grid(row = 1, column = 2)
-
-    confirm_button = Button(copy_window, text = "Confirm!", command = confirm_name)
-    confirm_button.grid(row = 1, column = 3)
-
 
 def move_window(event):
     root.geometry('+{0}+{1}'.format(event.x_root, event.y_root))
@@ -240,33 +209,38 @@ root.bind('<B1-Motion>', move_window)
 
 
 options_frame = LabelFrame(root)
+#options_frame.grid(row = 1, column = 1)
 options_frame.grid(row = 1, column = 1)
 
-function_button_1 = Button(options_frame, text = "+", command = create_template, width = 5, height = 1)
-function_button_1.grid(row = 1, column = 1)
-function_button_2 = Button(options_frame, text = "~", command = change_template, width = 5, height = 1)
-function_button_2.grid(row = 1, column = 3)
-function_button_3 = Button(options_frame, text = "=", command = copy_template, width = 5, height = 1)
-function_button_3.grid(row = 1, column = 2)
-function_button_4 = Button(options_frame, text = "-", command = delete_template, width = 5, height = 1)
-function_button_4.grid(row = 1, column = 4)
-exit_button_4 = Button(options_frame, text = "X", command = exit, width = 5, height = 1)
-exit_button_4.grid(row = 1, column = 5)
-
-
-templates_frame = LabelFrame(root, width = 100)
+templates_frame = LabelFrame(root)
+#templates_frame.grid(row = 1, column = 2)
 templates_frame.grid(row = 1, column = 2)
+
+exit_frame = LabelFrame(root)
+#exit_frame.grid(row = 1, column = 3)
+exit_frame.grid(row = 1, column = 3, sticky = W+E)
+
+
+
+
+create_button = Button(options_frame, text = "+", command = create_template, width = 5, height = 1)
+create_button.grid(row = 1, column = 1)
+copy_button = Button(options_frame, text = "=", command = copy_template, width = 5, height = 1)
+copy_button.grid(row = 1, column = 2)
+change_button = Button(options_frame, text = "~", command = change_template, width = 5, height = 1)
+change_button.grid(row = 1, column = 3)
+delete_button = Button(options_frame, text = "-", command = delete_template, width = 5, height = 1)
+delete_button.grid(row = 1, column = 4)
+
+exit_button = Button(exit_frame, text = "X", command = exit, width = 5, height = 1)
+exit_button.grid(row = 1, column = 1, sticky = E)
 
 template_buttons = [None] * 10
 template_button_names = [None] * 10
 
 refresh_window()
 
-
-
 root.mainloop()
 
 #clipboard_content = pyperclip.paste()
 #pyperclip.copy("Hello World")
-
-#test2
