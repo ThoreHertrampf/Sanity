@@ -5,6 +5,43 @@ from tkinter import messagebox
 from tkinter import filedialog
 from PIL import ImageTk, Image
 
+def refresh_window():
+
+
+    template_file = open("Templates.txt", "r")
+    lines_file = template_file.readlines()
+
+    length = len(lines_file)
+    if length > 2:
+        template_button_names[0] = lines_file[2]
+
+    i = 0
+    for lines in lines_file:
+        if lines == "End of template: " + template_button_names[i]:
+            if lines_file.index(lines)+3 > len(lines_file):
+                break
+
+            template_button_names[i+1] = lines_file[lines_file.index(lines)+3]
+
+            i = i + 1
+
+    template_file.close()
+
+    #creating buttons
+    i = 0
+    for template in template_buttons:
+        if template == None:
+            if template_button_names[template_buttons.index(template)] != None:
+                length = len(template_button_names[template_buttons.index(template)])
+                name = template_button_names[template_buttons.index(template)]
+                name = name[:length - 1]
+                template_buttons[template_buttons.index(template)] = Button(templates_frame, text = name, width = 10, height = 1, command = lambda j = name: copy_template(j))
+        i = i + 1
+
+    #putting buttons on screen
+    for template in template_buttons:
+        if template != None:
+            template.grid(row = 1, column = template_buttons.index(template))
 
 def create_template():
 
@@ -18,6 +55,7 @@ def create_template():
                 template_file.write("\n\n" + new_template.name + "\n\n" + new_template.text + "\n" + "End of template: " + new_template.name + "\n")
                 template_file.close()
                 create_window.destroy()
+                refresh_window()
 
             def no():
                 template.destroy()
@@ -89,43 +127,6 @@ def create_template():
     confirm_button = Button(create_window, text = "Confirm!", command = confirm_name)
     confirm_button.grid(row = 1, column = 3)
 
-
-
-
-
-
-    '''template_file = open("Templates.txt", "r")
-    lines_file = template_file.readlines()
-    name = input("Enter the name of a new template: ")
-
-    for lines in lines_file:
-        while lines == name+"\n":
-            print("This name is already in use, please choose another one")
-            name = input("Enter the name of a new template: ")
-    template_file.close()
-    pyperclip.copy("")
-
-    while 1:
-        print("Copy the template you want to save into the clipboard!\n")
-        input("Press 'Enter' to continue!")
-        text = pyperclip.paste()
-        print(text)
-        confirmation = input("Is this the input you want to save as a template? "
-              "(Yes/No/Exit): ")
-
-        if confirmation == "Yes" or confirmation == "yes":
-            new_template = Template(name, text)
-            template_file = open("Templates.txt", "a+")
-            template_file.write("\n\n" + new_template.name + "\n\n" + new_template.text + "\n" + "End of template: " + new_template.name + "\n")
-            template_file.close()
-            break
-        elif confirmation == "No" or confirmation == "no":
-            continue
-        elif confirmation == "Exit" or confirmation == "exit":
-            break'''
-
-
-
 def change_template():
     print("Changed Template")
 
@@ -169,17 +170,20 @@ def delete_template():
         if i == 1:
             print("No template matching the name was found.")
 
-def copy_template():
+def copy_template(number):
 
-    loop = 1
-    while loop == 1:
+    print(number)
+
+    def confirm_name():
+
+        if 'wrong_name' in globals():
+            wrong_name.destroy()
+
+        name = template_name.get()
+        template_name.delete(0, END)
+
         template_file = open("Templates.txt", "r")
         lines_file = template_file.readlines()
-
-        name = input("Type the name of the template you want to see: ")
-
-        if name == "exit":
-            break
 
         for lines in lines_file:
 
@@ -190,7 +194,6 @@ def copy_template():
             else:
                 i = 0
                 loop = 0
-                print("Template found and copied to clipboard.")
 
                 start = int(lines_file.index(name + "\n")) + 2
                 end = int(lines_file.index("End of template: " + name + "\n"))
@@ -201,49 +204,63 @@ def copy_template():
                         output = output + lines_file[n]
 
                 pyperclip.copy(output)
-                break
+                copy_window.destroy()
+                return
 
         if i == 1:
-            print("No template matching the name was found.")
-
-def switch_functions():
-    print("What do you want to do?\n\n"
-          "1: Create a new template\n"
-          "2: Change an existing template\n"
-          "3: Delete an existing template\n"
-          "4: Copy existing template to clipboard\n")
-    arg = 0
-    while arg < 1 or arg > 4:
-        arg = int(input("Number: "))
-
-    switch_functions = {
-        1: create_template,
-        2: change_template,
-        3: delete_template,
-        4: copy_template,
-    }
-    function = switch_functions.get(arg, lambda: print("Invalid input!"))
-    function()
-
-#while 1:
-#    switch_functions()
+            wrong_name = Label(copy_window, text = "No Template with that name exists!")
+            wrong_name.grid(row = 2, column = 2)
+            return
 
 
+    copy_window = Toplevel()
+    copy_window.title("Copy Template")
+    copy_window.geometry("1000x600")
+
+    label_entry = Label(copy_window, text = "Enter the name of the template you want to copy!")
+    label_entry.grid(row = 1, column = 1)
+
+    template_name = Entry(copy_window,  width = 40, borderwidth = 10)
+    template_name.grid(row = 1, column = 2)
+
+    confirm_button = Button(copy_window, text = "Confirm!", command = confirm_name)
+    confirm_button.grid(row = 1, column = 3)
+
+
+def move_window(event):
+    root.geometry('+{0}+{1}'.format(event.x_root, event.y_root))
 
 root = Tk()
 root.title("Sanity")
+#root.deiconify()
 #root.iconbitmap('')
-root.geometry("1000x600")
+#root.overrideredirect(True)
+root.geometry('1000x29+0+0')
+root.bind('<B1-Motion>', move_window)
 
-function_button_1 = Button(root, text = "Create Template", command = create_template)
-function_button_1.grid(row = 1, column = 1, padx = 10, pady = 5, ipadx = 10)
-function_button_2 = Button(root, text = "Change Template", command = change_template)
-function_button_2.grid(row = 2, column = 1, padx = 10, pady = 5, ipadx = 10)
-function_button_3 = Button(root, text = "Copy Template", command = copy_template)
-function_button_3.grid(row = 3, column = 1, padx = 10, pady = 5, ipadx = 10)
-function_button_4 = Button(root, text = "Delete Template", command = delete_template)
-function_button_4.grid(row = 4, column = 1, padx = 10, pady = 5, ipadx = 10)
 
+options_frame = LabelFrame(root)
+options_frame.grid(row = 1, column = 1)
+
+function_button_1 = Button(options_frame, text = "+", command = create_template, width = 5, height = 1)
+function_button_1.grid(row = 1, column = 1)
+function_button_2 = Button(options_frame, text = "~", command = change_template, width = 5, height = 1)
+function_button_2.grid(row = 1, column = 3)
+function_button_3 = Button(options_frame, text = "=", command = copy_template, width = 5, height = 1)
+function_button_3.grid(row = 1, column = 2)
+function_button_4 = Button(options_frame, text = "-", command = delete_template, width = 5, height = 1)
+function_button_4.grid(row = 1, column = 4)
+exit_button_4 = Button(options_frame, text = "X", command = exit, width = 5, height = 1)
+exit_button_4.grid(row = 1, column = 5)
+
+
+templates_frame = LabelFrame(root, width = 100)
+templates_frame.grid(row = 1, column = 2)
+
+template_buttons = [None] * 10
+template_button_names = [None] * 10
+
+refresh_window()
 
 
 

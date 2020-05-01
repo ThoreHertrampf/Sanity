@@ -2,92 +2,29 @@
 
 test
 
-\begin{figure}[H]
-
-	\begin{center}
-
-		\includegraphics[width=12cm]{figures/name}
-
-		\caption{}
-
-		\label{fig:}
-
-	\end{center}
-
-\end{figure}
-
-End of template: test
-
-
-test2
-
-1: Create a new template
-2: Change an existing template
-3: Delete an existing template
-4: Copy existing template to clipboard
-End of template: test2
-
-
-test3
-
-
-End of template: test3
-
-
-cviuop
-
-umn = 1)
-            no = Button(create_window, text = "Yes", command = no)
-            no.grid(row = 5, column = 2)
-End of template: cviuop
-
-
-test5
-
-\begin{figure}[H]
+%\begin{figure}[H]
 %	\centering
 %	\includegraphics[width=13cm]{Glasflaschen.jpg}
 %	\caption{}
 %	\label{fig:}
 %\end{figure}
 %\noindent
-End of template: test5
+End of template: test
 
 
-yugihljvghg
+test2
 
-ments>cd atom/sa
-End of template: yugihljvghg
-
-
-bfdf
-
-\usepackage[utf8]{inputenc}
-\usepackage{english}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage{pdfpages}
-\usepackage{longtable}
-\usepackage{float}
-\usepackage{pdfpages}
-\usepackage{listings}
-End of template: bfdf
+Exception
+End of template: test2
 
 
-iuztrdfghjk
+test3
 
-
-C:\Users\Thore\Documents\Atom\Sanity>main.py
-
-C:\Users\Thore\Documents\
-End of template: iuztrdfghjk
+ locals
+End of template: test3
 
 
-iuztrfghjklö
+test4
 
-name = template_name.get()
-        template_name.delete(0, END)
-End of template: iuztrfghjklö
+.index(templ
+End of template: test4
