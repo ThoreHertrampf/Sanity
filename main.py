@@ -111,9 +111,6 @@ def create_template():
         confirmation_template = Button(create_window, text = "Confirm!", command = confirm_template)
         confirmation_template.grid(row = 3, column = 3)
 
-
-
-
     create_window = Toplevel()
     create_window.title("Create Template")
     create_window.geometry("1000x600")
@@ -131,6 +128,38 @@ def change_template():
     print("Changed Template")
 
 def delete_template():
+
+    delete_window = Toplevel()
+    delete_window.title("Delete Template")
+    delete_window.geometry("1000x600")
+
+    label_entry = Label(delete_window, text = "Which template do you want to delete?")
+    label_entry.grid(row = 1, column = 1)
+
+    templates_frame2 = LabelFrame(delete_window)
+    templates_frame2.grid(row = 2, column = 1)
+    test = Button(templates_frame2, text = "Hello Test")
+    test.grid(row = 1, column = 1)()
+
+    '''#counting amount of buttons
+    count = 0
+    for names in template_button_names:
+        if name != None:
+            count = count + 1
+
+    #creating buttons
+    for number in count:
+        length = len(template_button_names[number])
+        name = template_button_names[number]
+        name = name[:length - 1]
+        template_buttons[number] = Button(templates_frame2, text = name, width = 10, height = 1, command = lambda j = name: copy_template(j))
+
+    #putting buttons on screen
+    for template in template_buttons:
+        if template != None:
+            template.grid(row = 1, column = template_buttons.index(template))'''
+
+
     loop = 1
     while loop == 1:
         template_file = open("Templates.txt", "r")
@@ -222,15 +251,12 @@ exit_frame.grid(row = 1, column = 3, sticky = W+E)
 
 
 
-
 create_button = Button(options_frame, text = "+", command = create_template, width = 5, height = 1)
 create_button.grid(row = 1, column = 1)
-copy_button = Button(options_frame, text = "=", command = copy_template, width = 5, height = 1)
-copy_button.grid(row = 1, column = 2)
 change_button = Button(options_frame, text = "~", command = change_template, width = 5, height = 1)
-change_button.grid(row = 1, column = 3)
+change_button.grid(row = 1, column = 2)
 delete_button = Button(options_frame, text = "-", command = delete_template, width = 5, height = 1)
-delete_button.grid(row = 1, column = 4)
+delete_button.grid(row = 1, column = 3)
 
 exit_button = Button(exit_frame, text = "X", command = exit, width = 5, height = 1)
 exit_button.grid(row = 1, column = 1, sticky = E)
