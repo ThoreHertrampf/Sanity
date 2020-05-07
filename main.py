@@ -129,59 +129,17 @@ def change_template():
 
 def delete_template():
 
-    delete_window = Toplevel()
-    delete_window.title("Delete Template")
-    delete_window.geometry("1000x600")
+    def delete(name):
+        print(name)
 
-    label_entry = Label(delete_window, text = "Which template do you want to delete?")
-    label_entry.grid(row = 1, column = 1)
-
-    templates_frame2 = LabelFrame(delete_window)
-    templates_frame2.grid(row = 2, column = 1)
-    test = Button(templates_frame2, text = "Hello Test")
-    test.grid(row = 1, column = 1)()
-
-    '''#counting amount of buttons
-    count = 0
-    for names in template_button_names:
-        if name != None:
-            count = count + 1
-
-    #creating buttons
-    for number in count:
-        length = len(template_button_names[number])
-        name = template_button_names[number]
-        name = name[:length - 1]
-        template_buttons[number] = Button(templates_frame2, text = name, width = 10, height = 1, command = lambda j = name: copy_template(j))
-
-    #putting buttons on screen
-    for template in template_buttons:
-        if template != None:
-            template.grid(row = 1, column = template_buttons.index(template))'''
-
-
-    loop = 1
-    while loop == 1:
         template_file = open("Templates.txt", "r")
         lines_file = template_file.readlines()
         template_file.close()
 
-        name = input("Type the name of the template you want to delete: ")
-
-        if name == "exit":
-            break
-
         for lines in lines_file:
-
-            i = 1
             if lines != name + "\n":
                 continue
-
             else:
-                i = 0
-                loop = 0
-                print("Template found and deleted.")
-
                 start = int(lines_file.index(name + "\n")) - 2
                 end = int(lines_file.index("End of template: " + name + "\n"))
 
@@ -194,10 +152,53 @@ def delete_template():
                     template_file.write(lines)
 
                 template_file.close()
+
+                for i in range(0, 9):
+                    print(template_button_names[i])
+
+                #template_buttons[template_button_names.index(name + "\n")] = None
+                #template_button_names[template_buttons.index(name + "\n")] = None
+
                 break
 
-        if i == 1:
-            print("No template matching the name was found.")
+        refresh_window()
+        delete_window.destroy()
+        return
+
+
+    delete_window = Toplevel()
+    delete_window.title("Delete Template")
+    delete_window.geometry("1000x600")
+
+    label_entry = Label(delete_window, text = "Which template do you want to delete?")
+    label_entry.grid(row = 1, column = 1)
+
+    templates_frame2 = LabelFrame(delete_window)
+    templates_frame2.grid(row = 2, column = 1)
+    test = Button(templates_frame2, text = "Hello Test")
+    test.grid(row = 1, column = 1)
+
+    '''#counting amount of buttons
+    count = 0
+    for names in template_button_names:
+        if names != None:
+            count = count + 1'''
+
+    #creating buttons
+    for number in range(0, 9):
+        if template_button_names[number] != None:
+            length = len(template_button_names[number])
+            name = template_button_names[number]
+            name = name[:length - 1]
+            template_buttons[number] = Button(templates_frame2, text = name, width = 10, height = 1, command = lambda j = name: delete(j))
+
+    #putting buttons on screen
+    for template in template_buttons:
+        if template != None:
+            template.grid(row = 1, column = template_buttons.index(template))
+
+
+
 
 def copy_template(name):
 
